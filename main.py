@@ -17,21 +17,23 @@ def main():
                 base_parent_product = ParentProduct.add(base_parent_product)
 
             for shop_to_compare in shops:
+                if shop_id == shop_to_compare.id: continue
+
                 shop_to_compare_id = shop_to_compare.id
                 most_similar_inside_a_shop = 0
                 most_similar_inside_a_shop_ratio = 0
 
-                if shop_id == shop_to_compare_id: continue
-
                 for product_to_compare in products_per_shop[shop_to_compare_id]:
-                    if not Product.similar(base_parent_product, product_to_compare): continue
-                    base_parent_product.sector_ids += ',' + product_to_compare.sector_ids
-                    product_to_compare.parent_id = base_parent_product.id
-                    session.add(base_parent_product)
-                    session.add(product_to_compare)
-                    session.commit()
+                    similarity = Product.similar(base_parent_product, product_to_compare)
+                    if similarity > most_similar_inside_a_shop_ratio:
+                        most_similar_inside_a_shop_ratio = similarity
+                        most_similar_inside_a_shop = product_to_compare
 
-
+                base_parent_product.sector_ids += ',' + most_similar_inside_a_shop.sector_ids
+                most_similar_inside_a_shop.parent_id = base_parent_product.id
+                session.add(base_parent_product)
+                session.add(most_similar_inside_a_shop)
+                session.commit()
 
 
 if __name__ == '__main__':
