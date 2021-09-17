@@ -7,7 +7,7 @@ class ShopModel(Model):
 
     __tablename__ = 'business_sectors'
 
-    id = Column(Integer)
+    id = Column(Integer, primary_key=True)
     name = Column(String)
     web_name = Column(String)
 

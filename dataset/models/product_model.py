@@ -7,7 +7,7 @@ class ProductModel(Model):
 
     __tablename__ = 'products'
 
-    id = Column(Integer)
+    id = Column(Integer, primary_key=True)
     parent_id = Column(Integer)
     name = Column(String)
     description = Column(String)
