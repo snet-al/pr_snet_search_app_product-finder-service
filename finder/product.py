@@ -20,7 +20,7 @@ class Product:
 
     @staticmethod
     def get_from_db_per_shop(shop_id):
-        return session(ProductModel).filter(ProductModel.parent_id != 0).filter(ProductModel.sector_ids == "_" + shop_id + "_").all()
+        return session.query(ProductModel).filter(ProductModel.parent_id != 0).filter(ProductModel.sector_ids == "_" + str(shop_id) + "_").all()
 
 
 class ParentProduct:
