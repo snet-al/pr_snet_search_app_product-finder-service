@@ -2,6 +2,10 @@ from dataset.database import *
 from dataset.models.product_model import ProductModel
 from finder.compare import similarity
 
+
+# this is the class which we define the logic of similarities based on product attributes
+# example the fields with according functionalities of similarities name -> similarity, price -> price_range etc.
+
 class Product:
     @staticmethod
     def similar(product1: ProductModel, product2: ProductModel):
