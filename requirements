@@ -1,0 +1,5 @@
+SQLAlchemy
+pymysql
+mysql-connector-python
+python-Levenshtein
+fuzzywuzzy
